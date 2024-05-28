@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import ConsultaPersonagens from "../consulta-personagens/consultaPersonagens";
 import { useNavigate } from "react-router-dom";
+import "./pagina.css";
 
-function ConsultaRAM() {
+function ConsultaRAM() {//
     const [personagens, setPersonagens] = useState([]);
     const navigate = useNavigate();
 
@@ -19,12 +20,36 @@ function ConsultaRAM() {
         });
     }, []);
       
-        function click(idPersonagem) {
-          navigate("/consulta-personagens/" + idPersonagem);
+    function click(idPersonagem) {//
+        navigate("/consulta-personagens/" + idPersonagem);
+    }
+
+    function pagina(numero){//
+
+        fetch("https://rickandmortyapi.com/api/character/?page="+ numero)
+        .then((resposta) => {
+            return resposta.json();
+        })
+        .then((resultadoConsulta) => {
+            setPersonagens(resultadoConsulta.results);
+        });
+
+    }
+
+    function pegaPagina(){//
+        const listaPaginas = []; //cria uma lista para armazenar as <div>
+        
+        for(let i = 0; i <= 42; i++){
+
+            listaPaginas.push(<div class="page-item" onClick={()=> pagina(i)}><a class="page-link" href="#">{i}</a></div>);
+            
         }
+        return listaPaginas;
+    }
 
     return <>
         {
+            
            personagens.map(personagem => {
              return <>
                 <h2>{personagem.name}</h2>
@@ -33,6 +58,10 @@ function ConsultaRAM() {
              </>
            })
         }
+
+        <footer>
+            {pegaPagina()}
+        </footer>
     </>
-    } 
+    }//Consulta RAM 
 export default ConsultaRAM;
