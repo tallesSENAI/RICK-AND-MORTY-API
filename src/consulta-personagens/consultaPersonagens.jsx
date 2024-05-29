@@ -22,16 +22,27 @@ function ConsultaPersonagens(){
             setListaPersonagens(resultadoConsulta);
         });
     }, []);
-    
+
+
+    function mostrarEpisodio(episodioLink) {//
+        const episodioId = episodioLink.split('https://rickandmortyapi.com/api/episode')
+        navigate("/mostra-episodio/" + episodioLink);
+    }
+
     return <>
-        <h3>{listaPersonagens.name}</h3>
-        <h3>{listaPersonagens.status}</h3>
-        <h3>{listaPersonagens.species}</h3>
-        <h3>{listaPersonagens.type}</h3>
-        <h3>{listaPersonagens.gender}</h3>
+        <h3>Name: {listaPersonagens.name}</h3>
         <h3>{<img src={listaPersonagens.image}/>}</h3>
-        <h3>{listaPersonagens.url}</h3>
-        <h3>{listaPersonagens.created}</h3>
+        <h3>Status: {listaPersonagens.status}</h3>
+        <h3>Species: {listaPersonagens.species}</h3>
+        <h3>Gender: {listaPersonagens.gender}</h3>
+        <h3>URL: {listaPersonagens.url}</h3>
+        <h3>Created in: {listaPersonagens.created}</h3>
+
+        {
+            listaPersonagens.episode && listaPersonagens.episode.map(episodios => {
+                return <h3>Episodes that it makes its appearence: <a onClick={mostrarEpisodio} class="page-link" href="#">{episodios}</a></h3>
+            })
+        }
     </>
 }
 

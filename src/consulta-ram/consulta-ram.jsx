@@ -53,8 +53,9 @@ function ConsultaRAM() {//
            personagens.map(personagem => {
              return <>
                 <h2>{personagem.name}</h2>
-                <h2>{personagem.gender}</h2>
+                <h3>{personagem.gender}</h3>
                 <h2 onClick={()=> click(personagem.id)}><img src={personagem.image}/></h2>
+                <br></br>
              </>
            })
         }

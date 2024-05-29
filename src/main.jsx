@@ -13,16 +13,24 @@ const routes = createBrowserRouter([
     path: '/',
     element: <Cabecalho />,
     children: [
+
       {
         path: '/tarefas',
         element: <Tarefas />
       },
+
       {
         path: '/consulta-personagens/:personagemId',
         element: <ConsultaPersonagens />
       },
+
       {
         path: '/consulta-ram',
+        element: <ConsultaRAM />
+      },
+
+      {
+        path: '/mostra-episodio:/episodioId',
         element: <ConsultaRAM />
       }
     ]
